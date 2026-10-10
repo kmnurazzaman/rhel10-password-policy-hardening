@@ -1,0 +1,42 @@
+# /etc/ssh/sshd_config — Hardened Configuration
+
+#sudo sshd -t [Validate the configuration]
+
+# RHEL/CentOS/Rocky [Restart the SSH service]
+#sudo systemctl restart sshd
+
+#Verify the service is running
+#sudo systemctl status sshd
+
+
+
+# ----- Network -----
+Port 2278
+AddressFamily inet
+Protocol 2
+
+# ----- Authentication -----
+PermitRootLogin no
+PasswordAuthentication no
+PubkeyAuthentication yes
+ChallengeResponseAuthentication no
+UsePAM yes
+MaxAuthTries 3
+MaxStartups 10:30:60
+LoginGraceTime 60
+
+# ----- Access Control -----
+AllowUsers alice bob carol
+# AllowGroups admins
+
+# ----- Session -----
+ClientAliveInterval 300
+ClientAliveCountMax 0
+
+# ----- Logging -----
+LogLevel VERBOSE
+
+# ----- Misc -----
+X11Forwarding no
+AllowTcpForwarding no
+PermitEmptyPasswords no
